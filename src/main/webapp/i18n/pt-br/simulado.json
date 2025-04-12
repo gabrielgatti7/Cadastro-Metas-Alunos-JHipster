@@ -1,0 +1,25 @@
+{
+  "cadastrodemetasApp": {
+    "simulado": {
+      "home": {
+        "title": "Simulados",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Simulado",
+        "createOrEditLabel": "Criar ou editar Simulado",
+        "notFound": "Nenhum Simulado encontrado"
+      },
+      "created": "Um novo Simulado foi criado com o identificador {{ param }}",
+      "updated": "Um Simulado foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Simulado foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Simulado {{ id }}?"
+      },
+      "detail": {
+        "title": "Simulado"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "nota": "Nota"
+    }
+  }
+}

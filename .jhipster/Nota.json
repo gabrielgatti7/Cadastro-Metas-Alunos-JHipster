@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20250412184546"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "valor",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "2000",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "area",
+      "fieldType": "AreaDoEnem",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "LINGUAGENS,HUMANAS,NATUREZA,MATEMATICA"
+    }
+  ],
+  "name": "Nota",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "aluno",
+      "relationshipName": "aluno",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "simulado",
+      "relationshipName": "simulado",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

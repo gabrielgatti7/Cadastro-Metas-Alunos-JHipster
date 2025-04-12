@@ -50,6 +50,13 @@ public class CacheConfiguration {
             createCache(cm, com.gabriel.cadastrodemetas.domain.User.class.getName());
             createCache(cm, com.gabriel.cadastrodemetas.domain.Authority.class.getName());
             createCache(cm, com.gabriel.cadastrodemetas.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.gabriel.cadastrodemetas.domain.Aluno.class.getName());
+            createCache(cm, com.gabriel.cadastrodemetas.domain.Aluno.class.getName() + ".metas");
+            createCache(cm, com.gabriel.cadastrodemetas.domain.Aluno.class.getName() + ".notas");
+            createCache(cm, com.gabriel.cadastrodemetas.domain.Simulado.class.getName());
+            createCache(cm, com.gabriel.cadastrodemetas.domain.Simulado.class.getName() + ".notas");
+            createCache(cm, com.gabriel.cadastrodemetas.domain.Meta.class.getName());
+            createCache(cm, com.gabriel.cadastrodemetas.domain.Nota.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

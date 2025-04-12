@@ -1,0 +1,11 @@
+{
+  "cadastrodemetasApp": {
+    "AreaDoEnem": {
+      "null": "",
+      "LINGUAGENS": "LINGUAGENS",
+      "HUMANAS": "HUMANAS",
+      "NATUREZA": "NATUREZA",
+      "MATEMATICA": "MATEMATICA"
+    }
+  }
+}

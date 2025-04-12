@@ -1,0 +1,25 @@
+{
+  "cadastrodemetasApp": {
+    "simulado": {
+      "home": {
+        "title": "Simulados",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Simulado",
+        "createOrEditLabel": "Create or edit a Simulado",
+        "notFound": "No Simulados found"
+      },
+      "created": "A new Simulado is created with identifier {{ param }}",
+      "updated": "A Simulado is updated with identifier {{ param }}",
+      "deleted": "A Simulado is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Simulado {{ id }}?"
+      },
+      "detail": {
+        "title": "Simulado"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "nota": "Nota"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+entity Aluno {
+  nome String required
+}
+
+entity Simulado {
+  nome String required maxlength(100)
+}
+
+enum AreaDoEnem {
+  LINGUAGENS,
+  HUMANAS,
+  NATUREZA,
+  MATEMATICA
+}
+
+entity Meta {
+  valor Integer required min(0) max(2000)
+  area AreaDoEnem required
+}
+
+entity Nota {
+  valor Integer required min(0) max(2000)
+  area AreaDoEnem required
+}
+
+relationship OneToMany {
+  Aluno to Meta{aluno(nome) required}
+  Aluno to Nota{aluno(nome) required}
+  Simulado to Nota{simulado(nome) required}
+}
+
+paginate Nota, Simulado with infinite-scroll
+service all with serviceClass

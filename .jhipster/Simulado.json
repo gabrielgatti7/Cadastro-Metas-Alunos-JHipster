@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20250412184544"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "name": "Simulado",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "nota",
+      "otherEntityRelationshipName": "simulado",
+      "relationshipName": "nota",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

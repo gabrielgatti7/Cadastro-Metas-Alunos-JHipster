@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (nota(); as notaRef) {
+      <div>
+        <h2 data-cy="notaDetailsHeading"><span jhiTranslate="cadastrodemetasApp.nota.detail.title">Nota</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ notaRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="cadastrodemetasApp.nota.valor">Valor</span></dt>
+          <dd>
+            <span>{{ notaRef.valor }}</span>
+          </dd>
+          <dt><span jhiTranslate="cadastrodemetasApp.nota.area">Area</span></dt>
+          <dd>
+            <span [jhiTranslate]="'cadastrodemetasApp.AreaDoEnem.' + (notaRef.area ?? 'null')">{{
+              { null: '', LINGUAGENS: 'LINGUAGENS', HUMANAS: 'HUMANAS', NATUREZA: 'NATUREZA', MATEMATICA: 'MATEMATICA' }[
+                notaRef.area ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="cadastrodemetasApp.nota.aluno">Aluno</span></dt>
+          <dd>
+            @if (nota()!.aluno) {
+              <div>
+                <a [routerLink]="['/aluno', nota()!.aluno?.id, 'view']">{{ notaRef.aluno?.nome }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="cadastrodemetasApp.nota.simulado">Simulado</span></dt>
+          <dd>
+            @if (nota()!.simulado) {
+              <div>
+                <a [routerLink]="['/simulado', nota()!.simulado?.id, 'view']">{{ notaRef.simulado?.nome }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/nota', notaRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

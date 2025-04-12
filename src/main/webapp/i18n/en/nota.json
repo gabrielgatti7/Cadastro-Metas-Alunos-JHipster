@@ -1,0 +1,27 @@
+{
+  "cadastrodemetasApp": {
+    "nota": {
+      "home": {
+        "title": "Notas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Nota",
+        "createOrEditLabel": "Create or edit a Nota",
+        "notFound": "No Notas found"
+      },
+      "created": "A new Nota is created with identifier {{ param }}",
+      "updated": "A Nota is updated with identifier {{ param }}",
+      "deleted": "A Nota is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Nota {{ id }}?"
+      },
+      "detail": {
+        "title": "Nota"
+      },
+      "id": "ID",
+      "valor": "Valor",
+      "area": "Area",
+      "aluno": "Aluno",
+      "simulado": "Simulado"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cadastrodemetasApp": {
+    "nota": {
+      "home": {
+        "title": "Notas",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Nota",
+        "createOrEditLabel": "Criar ou editar Nota",
+        "notFound": "Nenhum Nota encontrado"
+      },
+      "created": "Um novo Nota foi criado com o identificador {{ param }}",
+      "updated": "Um Nota foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Nota foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Nota {{ id }}?"
+      },
+      "detail": {
+        "title": "Nota"
+      },
+      "id": "ID",
+      "valor": "Valor",
+      "area": "Area",
+      "aluno": "Aluno",
+      "simulado": "Simulado"
+    }
+  }
+}
