@@ -22,4 +22,5 @@
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
     <include file="config/liquibase/changelog/20250412184547_add_unique_meta_constraint.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250413123710_add_unique_nota_constraint.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>
