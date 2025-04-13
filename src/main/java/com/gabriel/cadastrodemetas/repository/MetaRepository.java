@@ -26,6 +26,8 @@ public interface MetaRepository extends JpaRepository<Meta, Long> {
         return this.findAllWithToOneRelationships(pageable);
     }
 
+    List<Meta> findByAlunoId(Long alunoId);
+
     @Query(value = "select meta from Meta meta left join fetch meta.aluno", countQuery = "select count(meta) from Meta meta")
     Page<Meta> findAllWithToOneRelationships(Pageable pageable);
 

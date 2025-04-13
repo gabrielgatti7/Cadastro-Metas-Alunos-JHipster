@@ -153,6 +153,11 @@ public class MetaResource {
         return ResponseUtil.wrapOrNotFound(meta);
     }
 
+    @GetMapping("/metas/aluno/{alunoId}")
+    public List<Meta> getMetasByAluno(@PathVariable Long alunoId) {
+        return metaRepository.findByAlunoId(alunoId);
+    }
+
     /**
      * {@code DELETE  /metas/:id} : delete the "id" meta.
      *
