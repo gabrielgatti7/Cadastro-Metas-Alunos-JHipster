@@ -19,6 +19,7 @@ type AlunoFormDefaults = Pick<NewAluno, 'id'>;
 type AlunoFormGroupContent = {
   id: FormControl<IAluno['id'] | NewAluno['id']>;
   nome: FormControl<IAluno['nome']>;
+  email: FormControl<IAluno['email']>;
 };
 
 export type AlunoFormGroup = FormGroup<AlunoFormGroupContent>;
@@ -39,6 +40,9 @@ export class AlunoFormService {
         },
       ),
       nome: new FormControl(alunoRawValue.nome, {
+        validators: [Validators.required],
+      }),
+      email: new FormControl(alunoRawValue.email, {
         validators: [Validators.required],
       }),
     });

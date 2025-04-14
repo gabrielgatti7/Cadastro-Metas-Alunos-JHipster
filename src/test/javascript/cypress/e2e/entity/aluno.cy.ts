@@ -15,19 +15,54 @@ describe('Aluno e2e test', () => {
   const alunoPageUrlPattern = new RegExp('/aluno(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const alunoSample = { nome: 'failing' };
+  // const alunoSample = {"nome":"cycle roger bleakly","email":"Rhianna29@yahoo.com"};
 
   let aluno;
+  // let user;
 
   beforeEach(() => {
     cy.login(username, password);
   });
+
+  /* Disabled due to incompatibility
+  beforeEach(() => {
+    // create an instance at the required relationship entity:
+    cy.authenticatedRequest({
+      method: 'POST',
+      url: '/api/users',
+      body: {"login":"qLO@","firstName":"Keanu","lastName":"Walter","email":"Trinity15@gmail.com","imageUrl":"since","langKey":"compassion"},
+    }).then(({ body }) => {
+      user = body;
+    });
+  });
+   */
 
   beforeEach(() => {
     cy.intercept('GET', '/api/alunos+(?*|)').as('entitiesRequest');
     cy.intercept('POST', '/api/alunos').as('postEntityRequest');
     cy.intercept('DELETE', '/api/alunos/*').as('deleteEntityRequest');
   });
+
+  /* Disabled due to incompatibility
+  beforeEach(() => {
+    // Simulate relationships api for better performance and reproducibility.
+    cy.intercept('GET', '/api/users', {
+      statusCode: 200,
+      body: [user],
+    });
+
+    cy.intercept('GET', '/api/metas', {
+      statusCode: 200,
+      body: [],
+    });
+
+    cy.intercept('GET', '/api/notas', {
+      statusCode: 200,
+      body: [],
+    });
+
+  });
+   */
 
   afterEach(() => {
     if (aluno) {
@@ -39,6 +74,19 @@ describe('Aluno e2e test', () => {
       });
     }
   });
+
+  /* Disabled due to incompatibility
+  afterEach(() => {
+    if (user) {
+      cy.authenticatedRequest({
+        method: 'DELETE',
+        url: `/api/users/${user.id}`,
+      }).then(() => {
+        user = undefined;
+      });
+    }
+  });
+   */
 
   it('Alunos menu should load Alunos page', () => {
     cy.visit('/');
@@ -75,11 +123,15 @@ describe('Aluno e2e test', () => {
     });
 
     describe('with existing value', () => {
+      /* Disabled due to incompatibility
       beforeEach(() => {
         cy.authenticatedRequest({
           method: 'POST',
           url: '/api/alunos',
-          body: alunoSample,
+          body: {
+            ...alunoSample,
+            user: user,
+          },
         }).then(({ body }) => {
           aluno = body;
 
@@ -92,13 +144,24 @@ describe('Aluno e2e test', () => {
             {
               statusCode: 200,
               body: [aluno],
-            },
+            }
           ).as('entitiesRequestInternal');
         });
 
         cy.visit(alunoPageUrl);
 
         cy.wait('@entitiesRequestInternal');
+      });
+       */
+
+      beforeEach(function () {
+        cy.visit(alunoPageUrl);
+
+        cy.wait('@entitiesRequest').then(({ response }) => {
+          if (response?.body.length === 0) {
+            this.skip();
+          }
+        });
       });
 
       it('detail button click should load details Aluno page', () => {
@@ -132,7 +195,8 @@ describe('Aluno e2e test', () => {
         cy.url().should('match', alunoPageUrlPattern);
       });
 
-      it('last delete button click should delete instance of Aluno', () => {
+      // Reason: cannot create a required entity with relationship with required relationships.
+      it.skip('last delete button click should delete instance of Aluno', () => {
         cy.get(entityDeleteButtonSelector).last().click();
         cy.getEntityDeleteDialogHeading('aluno').should('exist');
         cy.get(entityConfirmDeleteButtonSelector).click();
@@ -156,9 +220,15 @@ describe('Aluno e2e test', () => {
       cy.getEntityCreateUpdateHeading('Aluno');
     });
 
-    it('should create an instance of Aluno', () => {
-      cy.get(`[data-cy="nome"]`).type('subdued zowie');
-      cy.get(`[data-cy="nome"]`).should('have.value', 'subdued zowie');
+    // Reason: cannot create a required entity with relationship with required relationships.
+    it.skip('should create an instance of Aluno', () => {
+      cy.get(`[data-cy="nome"]`).type('political');
+      cy.get(`[data-cy="nome"]`).should('have.value', 'political');
+
+      cy.get(`[data-cy="email"]`).type('Jed.Franey89@hotmail.com');
+      cy.get(`[data-cy="email"]`).should('have.value', 'Jed.Franey89@hotmail.com');
+
+      cy.get(`[data-cy="user"]`).select(1);
 
       cy.get(entityCreateSaveButtonSelector).click();
 

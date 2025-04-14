@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
@@ -55,6 +56,7 @@ public class SimuladoResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Simulado> createSimulado(@Valid @RequestBody Simulado simulado) throws URISyntaxException {
         LOG.debug("REST request to save Simulado : {}", simulado);
         if (simulado.getId() != null) {
@@ -77,6 +79,7 @@ public class SimuladoResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Simulado> updateSimulado(
         @PathVariable(value = "id", required = false) final Long id,
         @Valid @RequestBody Simulado simulado
@@ -111,6 +114,7 @@ public class SimuladoResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Simulado> partialUpdateSimulado(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody Simulado simulado
@@ -169,6 +173,7 @@ public class SimuladoResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteSimulado(@PathVariable("id") Long id) {
         LOG.debug("REST request to delete Simulado : {}", id);
         simuladoService.delete(id);

@@ -11,10 +11,12 @@ import { IAluno } from '../aluno.model';
 import { AlunoService, EntityArrayResponseType } from '../service/aluno.service';
 import { AlunoDeleteDialogComponent } from '../delete/aluno-delete-dialog.component';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+
 @Component({
   selector: 'jhi-aluno',
   templateUrl: './aluno.component.html',
-  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective],
+  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, HasAnyAuthorityDirective],
 })
 export class AlunoComponent implements OnInit {
   subscription: Subscription | null = null;
@@ -92,6 +94,7 @@ export class AlunoComponent implements OnInit {
   protected queryBackend(): Observable<EntityArrayResponseType> {
     this.isLoading = true;
     const queryObject: any = {
+      eagerload: true,
       sort: this.sortService.buildSortParam(this.sortState()),
     };
     return this.alunoService.query(queryObject).pipe(tap(() => (this.isLoading = false)));

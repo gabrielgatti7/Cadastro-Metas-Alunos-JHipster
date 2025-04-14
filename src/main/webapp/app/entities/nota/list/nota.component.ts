@@ -16,10 +16,12 @@ import { EntityArrayResponseType, NotaService } from '../service/nota.service';
 import { NotaDeleteDialogComponent } from '../delete/nota-delete-dialog.component';
 import { INota } from '../nota.model';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+
 @Component({
   selector: 'jhi-nota',
   templateUrl: './nota.component.html',
-  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, InfiniteScrollDirective],
+  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, InfiniteScrollDirective, HasAnyAuthorityDirective],
 })
 export class NotaComponent implements OnInit {
   subscription: Subscription | null = null;

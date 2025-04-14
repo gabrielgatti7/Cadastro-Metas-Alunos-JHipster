@@ -19,6 +19,8 @@
       },
       "id": "ID",
       "nome": "Nome",
+      "email": "Email",
+      "user": "User",
       "meta": "Meta",
       "nota": "Nota"
     }

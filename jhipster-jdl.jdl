@@ -1,5 +1,6 @@
 entity Aluno {
   nome String required
+  email String required
 }
 
 entity Simulado {
@@ -28,6 +29,11 @@ relationship OneToMany {
   Aluno to Nota{aluno(nome) required}
   Simulado to Nota{simulado(nome) required}
 }
+
+relationship OneToOne {
+  Aluno{user(login) required} to User with builtInEntity
+}
+
 
 paginate Nota, Simulado with infinite-scroll
 service all with serviceClass

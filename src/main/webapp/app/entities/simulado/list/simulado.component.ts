@@ -16,10 +16,12 @@ import { EntityArrayResponseType, SimuladoService } from '../service/simulado.se
 import { SimuladoDeleteDialogComponent } from '../delete/simulado-delete-dialog.component';
 import { ISimulado } from '../simulado.model';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+
 @Component({
   selector: 'jhi-simulado',
   templateUrl: './simulado.component.html',
-  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, InfiniteScrollDirective],
+  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, InfiniteScrollDirective, HasAnyAuthorityDirective],
 })
 export class SimuladoComponent implements OnInit {
   subscription: Subscription | null = null;

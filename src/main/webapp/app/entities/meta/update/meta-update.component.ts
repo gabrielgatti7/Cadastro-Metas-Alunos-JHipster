@@ -13,7 +13,6 @@ import { AreaDoEnem } from 'app/entities/enumerations/area-do-enem.model';
 import { MetaService } from '../service/meta.service';
 import { IMeta } from '../meta.model';
 import { MetaFormGroup, MetaFormService } from './meta-form.service';
-import { AlertService } from '../../../core/util/alert.service';
 
 @Component({
   selector: 'jhi-meta-update',
@@ -31,7 +30,6 @@ export class MetaUpdateComponent implements OnInit {
   protected metaFormService = inject(MetaFormService);
   protected alunoService = inject(AlunoService);
   protected activatedRoute = inject(ActivatedRoute);
-  protected alertService: AlertService = inject(AlertService);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: MetaFormGroup = this.metaFormService.createMetaFormGroup();
@@ -63,14 +61,10 @@ export class MetaUpdateComponent implements OnInit {
     }
   }
 
-  getAlunoLabel(aluno: IAluno): string {
-    return `${aluno.nome} (ID ${aluno.id})`;
-  }
-
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IMeta>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
-      error: err => this.onSaveError(err),
+      error: () => this.onSaveError(),
     });
   }
 
@@ -78,20 +72,8 @@ export class MetaUpdateComponent implements OnInit {
     this.previousState();
   }
 
-  protected onSaveError(error: any): void {
-    this.isSaving = false;
-
-    if (error?.error?.type === 'https://www.jhipster.tech/problem/problem-with-message' && error?.error?.errorKey === 'duplicated') {
-      this.alertService.addAlert({
-        type: 'danger',
-        message: 'There is already a meta registered for this area and student.',
-      });
-    } else {
-      this.alertService.addAlert({
-        type: 'danger',
-        message: 'Error saving meta.\n' + '\n',
-      });
-    }
+  protected onSaveError(): void {
+    // Api for inheritance.
   }
 
   protected onSaveFinalize(): void {

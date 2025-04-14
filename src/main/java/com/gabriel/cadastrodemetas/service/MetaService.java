@@ -2,12 +2,10 @@ package com.gabriel.cadastrodemetas.service;
 
 import com.gabriel.cadastrodemetas.domain.Meta;
 import com.gabriel.cadastrodemetas.repository.MetaRepository;
-import com.gabriel.cadastrodemetas.web.rest.errors.BadRequestAlertException;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -36,11 +34,7 @@ public class MetaService {
      */
     public Meta save(Meta meta) {
         LOG.debug("Request to save Meta : {}", meta);
-        try {
-            return metaRepository.save(meta);
-        } catch (DataIntegrityViolationException e) {
-            throw new BadRequestAlertException("There is already a meta registered for this area and student.", "meta", "duplicated");
-        }
+        return metaRepository.save(meta);
     }
 
     /**
@@ -51,11 +45,7 @@ public class MetaService {
      */
     public Meta update(Meta meta) {
         LOG.debug("Request to update Meta : {}", meta);
-        try {
-            return metaRepository.save(meta);
-        } catch (DataIntegrityViolationException e) {
-            throw new BadRequestAlertException("There is already a meta registered for this area and student.", "meta", "duplicated");
-        }
+        return metaRepository.save(meta);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.gabriel.cadastrodemetas.repository;
 
 import com.gabriel.cadastrodemetas.domain.Authority;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface AuthorityRepository extends JpaRepository<Authority, String> {}
+public interface AuthorityRepository extends JpaRepository<Authority, String> {
+    Optional<Authority> findByName(String roleAluno);
+}

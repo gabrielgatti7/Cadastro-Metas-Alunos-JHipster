@@ -30,6 +30,14 @@ public class Aluno implements Serializable {
     @Column(name = "nome", nullable = false)
     private String nome;
 
+    @NotNull
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(unique = true)
+    private User user;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "aluno")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "aluno" }, allowSetters = true)
@@ -66,6 +74,32 @@ public class Aluno implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public Aluno email(String email) {
+        this.setEmail(email);
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Aluno user(User user) {
+        this.setUser(user);
+        return this;
     }
 
     public Set<Meta> getMetas() {
@@ -155,6 +189,7 @@ public class Aluno implements Serializable {
         return "Aluno{" +
             "id=" + getId() +
             ", nome='" + getNome() + "'" +
+            ", email='" + getEmail() + "'" +
             "}";
     }
 }

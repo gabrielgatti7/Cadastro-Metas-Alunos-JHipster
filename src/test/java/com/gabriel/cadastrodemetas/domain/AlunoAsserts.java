@@ -47,7 +47,8 @@ public class AlunoAsserts {
     public static void assertAlunoUpdatableFieldsEquals(Aluno expected, Aluno actual) {
         assertThat(actual)
             .as("Verify Aluno relevant properties")
-            .satisfies(a -> assertThat(a.getNome()).as("check nome").isEqualTo(expected.getNome()));
+            .satisfies(a -> assertThat(a.getNome()).as("check nome").isEqualTo(expected.getNome()))
+            .satisfies(a -> assertThat(a.getEmail()).as("check email").isEqualTo(expected.getEmail()));
     }
 
     /**

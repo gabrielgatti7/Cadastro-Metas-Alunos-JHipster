@@ -66,7 +66,7 @@
               <option [ngValue]="null" selected></option>
             }
             @for (alunoOption of alunosSharedCollection; track $index) {
-              <option [ngValue]="alunoOption">{{ getAlunoLabel(alunoOption) }}</option>
+              <option [ngValue]="alunoOption">{{ alunoOption.nome }}</option>
             }
           </select>
         </div>
@@ -92,7 +92,7 @@
               <option [ngValue]="null" selected></option>
             }
             @for (simuladoOption of simuladosSharedCollection; track $index) {
-              <option [ngValue]="simuladoOption">{{ getSimuladoLabel(simuladoOption) }}</option>
+              <option [ngValue]="simuladoOption">{{ simuladoOption.nome }}</option>
             }
           </select>
         </div>

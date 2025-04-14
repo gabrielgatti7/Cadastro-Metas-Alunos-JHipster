@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -50,6 +51,7 @@ public class AlunoResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Aluno> createAluno(@Valid @RequestBody Aluno aluno) throws URISyntaxException {
         LOG.debug("REST request to save Aluno : {}", aluno);
         if (aluno.getId() != null) {
@@ -72,6 +74,7 @@ public class AlunoResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Aluno> updateAluno(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody Aluno aluno)
         throws URISyntaxException {
         LOG.debug("REST request to update Aluno : {}, {}", id, aluno);
@@ -104,6 +107,7 @@ public class AlunoResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Aluno> partialUpdateAluno(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody Aluno aluno
@@ -131,10 +135,12 @@ public class AlunoResource {
     /**
      * {@code GET  /alunos} : get all the alunos.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of alunos in body.
      */
     @GetMapping("")
-    public List<Aluno> getAllAlunos() {
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public List<Aluno> getAllAlunos(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
         LOG.debug("REST request to get all Alunos");
         return alunoService.findAll();
     }
@@ -146,6 +152,7 @@ public class AlunoResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the aluno, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Aluno> getAluno(@PathVariable("id") Long id) {
         LOG.debug("REST request to get Aluno : {}", id);
         Optional<Aluno> aluno = alunoService.findOne(id);
@@ -159,6 +166,7 @@ public class AlunoResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteAluno(@PathVariable("id") Long id) {
         LOG.debug("REST request to delete Aluno : {}", id);
         alunoService.delete(id);

@@ -11,10 +11,12 @@ import { IMeta } from '../meta.model';
 import { EntityArrayResponseType, MetaService } from '../service/meta.service';
 import { MetaDeleteDialogComponent } from '../delete/meta-delete-dialog.component';
 
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+
 @Component({
   selector: 'jhi-meta',
   templateUrl: './meta.component.html',
-  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective],
+  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, HasAnyAuthorityDirective],
 })
 export class MetaComponent implements OnInit {
   subscription: Subscription | null = null;

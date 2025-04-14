@@ -15,22 +15,23 @@ describe('Nota e2e test', () => {
   const notaPageUrlPattern = new RegExp('/nota(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const notaSample = { valor: 833, area: 'HUMANAS' };
+  // const notaSample = {"valor":1909,"area":"MATEMATICA"};
 
   let nota;
-  let aluno;
-  let simulado;
+  // let aluno;
+  // let simulado;
 
   beforeEach(() => {
     cy.login(username, password);
   });
 
+  /* Disabled due to incompatibility
   beforeEach(() => {
     // create an instance at the required relationship entity:
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/alunos',
-      body: { nome: 'indeed because who' },
+      body: {"nome":"annual though","email":"Raoul20@yahoo.com"},
     }).then(({ body }) => {
       aluno = body;
     });
@@ -38,11 +39,12 @@ describe('Nota e2e test', () => {
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/simulados',
-      body: { nome: 'till' },
+      body: {"nome":"till"},
     }).then(({ body }) => {
       simulado = body;
     });
   });
+   */
 
   beforeEach(() => {
     cy.intercept('GET', '/api/notas+(?*|)').as('entitiesRequest');
@@ -50,6 +52,7 @@ describe('Nota e2e test', () => {
     cy.intercept('DELETE', '/api/notas/*').as('deleteEntityRequest');
   });
 
+  /* Disabled due to incompatibility
   beforeEach(() => {
     // Simulate relationships api for better performance and reproducibility.
     cy.intercept('GET', '/api/alunos', {
@@ -61,7 +64,9 @@ describe('Nota e2e test', () => {
       statusCode: 200,
       body: [simulado],
     });
+
   });
+   */
 
   afterEach(() => {
     if (nota) {
@@ -74,6 +79,7 @@ describe('Nota e2e test', () => {
     }
   });
 
+  /* Disabled due to incompatibility
   afterEach(() => {
     if (aluno) {
       cy.authenticatedRequest({
@@ -92,6 +98,7 @@ describe('Nota e2e test', () => {
       });
     }
   });
+   */
 
   it('Notas menu should load Notas page', () => {
     cy.visit('/');
@@ -128,14 +135,15 @@ describe('Nota e2e test', () => {
     });
 
     describe('with existing value', () => {
+      /* Disabled due to incompatibility
       beforeEach(() => {
         cy.authenticatedRequest({
           method: 'POST',
           url: '/api/notas',
           body: {
             ...notaSample,
-            aluno,
-            simulado,
+            aluno: aluno,
+            simulado: simulado,
           },
         }).then(({ body }) => {
           nota = body;
@@ -152,13 +160,24 @@ describe('Nota e2e test', () => {
                 link: '<http://localhost/api/notas?page=0&size=20>; rel="last",<http://localhost/api/notas?page=0&size=20>; rel="first"',
               },
               body: [nota],
-            },
+            }
           ).as('entitiesRequestInternal');
         });
 
         cy.visit(notaPageUrl);
 
         cy.wait('@entitiesRequestInternal');
+      });
+       */
+
+      beforeEach(function () {
+        cy.visit(notaPageUrl);
+
+        cy.wait('@entitiesRequest').then(({ response }) => {
+          if (response?.body.length === 0) {
+            this.skip();
+          }
+        });
       });
 
       it('detail button click should load details Nota page', () => {
@@ -192,7 +211,8 @@ describe('Nota e2e test', () => {
         cy.url().should('match', notaPageUrlPattern);
       });
 
-      it('last delete button click should delete instance of Nota', () => {
+      // Reason: cannot create a required entity with relationship with required relationships.
+      it.skip('last delete button click should delete instance of Nota', () => {
         cy.get(entityDeleteButtonSelector).last().click();
         cy.getEntityDeleteDialogHeading('nota').should('exist');
         cy.get(entityConfirmDeleteButtonSelector).click();
@@ -216,11 +236,12 @@ describe('Nota e2e test', () => {
       cy.getEntityCreateUpdateHeading('Nota');
     });
 
-    it('should create an instance of Nota', () => {
-      cy.get(`[data-cy="valor"]`).type('19');
-      cy.get(`[data-cy="valor"]`).should('have.value', '19');
+    // Reason: cannot create a required entity with relationship with required relationships.
+    it.skip('should create an instance of Nota', () => {
+      cy.get(`[data-cy="valor"]`).type('441');
+      cy.get(`[data-cy="valor"]`).should('have.value', '441');
 
-      cy.get(`[data-cy="area"]`).select('HUMANAS');
+      cy.get(`[data-cy="area"]`).select('MATEMATICA');
 
       cy.get(`[data-cy="aluno"]`).select(1);
       cy.get(`[data-cy="simulado"]`).select(1);

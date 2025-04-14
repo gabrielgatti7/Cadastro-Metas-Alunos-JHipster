@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -50,6 +51,7 @@ public class MetaResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Meta> createMeta(@Valid @RequestBody Meta meta) throws URISyntaxException {
         LOG.debug("REST request to save Meta : {}", meta);
         if (meta.getId() != null) {
@@ -72,6 +74,7 @@ public class MetaResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Meta> updateMeta(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody Meta meta)
         throws URISyntaxException {
         LOG.debug("REST request to update Meta : {}, {}", id, meta);
@@ -104,6 +107,7 @@ public class MetaResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Meta> partialUpdateMeta(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody Meta meta
@@ -153,11 +157,6 @@ public class MetaResource {
         return ResponseUtil.wrapOrNotFound(meta);
     }
 
-    @GetMapping("/metas/aluno/{alunoId}")
-    public List<Meta> getMetasByAluno(@PathVariable Long alunoId) {
-        return metaRepository.findByAlunoId(alunoId);
-    }
-
     /**
      * {@code DELETE  /metas/:id} : delete the "id" meta.
      *
@@ -165,6 +164,7 @@ public class MetaResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteMeta(@PathVariable("id") Long id) {
         LOG.debug("REST request to delete Meta : {}", id);
         metaService.delete(id);

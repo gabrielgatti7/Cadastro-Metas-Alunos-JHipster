@@ -19,6 +19,14 @@
           <dd>
             <span>{{ alunoRef.nome }}</span>
           </dd>
+          <dt><span jhiTranslate="cadastrodemetasApp.aluno.email">Email</span></dt>
+          <dd>
+            <span>{{ alunoRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="cadastrodemetasApp.aluno.user">User</span></dt>
+          <dd>
+            <span>{{ alunoRef.user?.login }}</span>
+          </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

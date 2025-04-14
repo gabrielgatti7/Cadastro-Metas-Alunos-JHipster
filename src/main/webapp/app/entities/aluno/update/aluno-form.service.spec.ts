@@ -21,6 +21,8 @@ describe('Aluno Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             nome: expect.any(Object),
+            email: expect.any(Object),
+            user: expect.any(Object),
           }),
         );
       });
@@ -32,6 +34,8 @@ describe('Aluno Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             nome: expect.any(Object),
+            email: expect.any(Object),
+            user: expect.any(Object),
           }),
         );
       });

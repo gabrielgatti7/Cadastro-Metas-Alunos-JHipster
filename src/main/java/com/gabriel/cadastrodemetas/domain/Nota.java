@@ -38,7 +38,7 @@ public class Nota implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "metas", "notas" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "user", "metas", "notas" }, allowSetters = true)
     private Aluno aluno;
 
     @ManyToOne(optional = false)

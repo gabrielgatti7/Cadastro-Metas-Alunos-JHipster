@@ -52,13 +52,6 @@ export class MetaService {
     return o1 && o2 ? this.getMetaIdentifier(o1) === this.getMetaIdentifier(o2) : o1 === o2;
   }
 
-  // findByAluno(alunoId: number): Observable<HttpResponse<IMeta[]>> {
-  //   return this.http.get<IMeta[]>(`${this.resourceUrl}/aluno/${alunoId}`, { observe: 'response' });
-  // }
-  findByAluno(alunoId: number): Observable<IMeta[]> {
-    return this.http.get<IMeta[]>(`${this.resourceUrl}/by-aluno/${alunoId}`);
-  }
-
   addMetaToCollectionIfMissing<Type extends Pick<IMeta, 'id'>>(
     metaCollection: Type[],
     ...metasToCheck: (Type | null | undefined)[]

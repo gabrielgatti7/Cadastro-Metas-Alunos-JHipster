@@ -67,14 +67,6 @@ export class NotaUpdateComponent implements OnInit {
     }
   }
 
-  getAlunoLabel(aluno: IAluno): string {
-    return `${aluno.nome} (ID ${aluno.id})`;
-  }
-
-  getSimuladoLabel(simulado: ISimulado): string {
-    return `${simulado.nome} (ID ${simulado.id})`;
-  }
-
   protected subscribeToSaveResponse(result: Observable<HttpResponse<INota>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),

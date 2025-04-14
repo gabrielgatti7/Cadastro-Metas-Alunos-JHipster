@@ -15,25 +15,27 @@ describe('Meta e2e test', () => {
   const metaPageUrlPattern = new RegExp('/meta(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const metaSample = { valor: 393, area: 'HUMANAS' };
+  // const metaSample = {"valor":1569,"area":"HUMANAS"};
 
   let meta;
-  let aluno;
+  // let aluno;
 
   beforeEach(() => {
     cy.login(username, password);
   });
 
+  /* Disabled due to incompatibility
   beforeEach(() => {
     // create an instance at the required relationship entity:
     cy.authenticatedRequest({
       method: 'POST',
       url: '/api/alunos',
-      body: { nome: 'roger' },
+      body: {"nome":"who","email":"Isabelle.Kessler@hotmail.com"},
     }).then(({ body }) => {
       aluno = body;
     });
   });
+   */
 
   beforeEach(() => {
     cy.intercept('GET', '/api/metas+(?*|)').as('entitiesRequest');
@@ -41,13 +43,16 @@ describe('Meta e2e test', () => {
     cy.intercept('DELETE', '/api/metas/*').as('deleteEntityRequest');
   });
 
+  /* Disabled due to incompatibility
   beforeEach(() => {
     // Simulate relationships api for better performance and reproducibility.
     cy.intercept('GET', '/api/alunos', {
       statusCode: 200,
       body: [aluno],
     });
+
   });
+   */
 
   afterEach(() => {
     if (meta) {
@@ -60,6 +65,7 @@ describe('Meta e2e test', () => {
     }
   });
 
+  /* Disabled due to incompatibility
   afterEach(() => {
     if (aluno) {
       cy.authenticatedRequest({
@@ -70,6 +76,7 @@ describe('Meta e2e test', () => {
       });
     }
   });
+   */
 
   it('Metas menu should load Metas page', () => {
     cy.visit('/');
@@ -106,13 +113,14 @@ describe('Meta e2e test', () => {
     });
 
     describe('with existing value', () => {
+      /* Disabled due to incompatibility
       beforeEach(() => {
         cy.authenticatedRequest({
           method: 'POST',
           url: '/api/metas',
           body: {
             ...metaSample,
-            aluno,
+            aluno: aluno,
           },
         }).then(({ body }) => {
           meta = body;
@@ -126,13 +134,24 @@ describe('Meta e2e test', () => {
             {
               statusCode: 200,
               body: [meta],
-            },
+            }
           ).as('entitiesRequestInternal');
         });
 
         cy.visit(metaPageUrl);
 
         cy.wait('@entitiesRequestInternal');
+      });
+       */
+
+      beforeEach(function () {
+        cy.visit(metaPageUrl);
+
+        cy.wait('@entitiesRequest').then(({ response }) => {
+          if (response?.body.length === 0) {
+            this.skip();
+          }
+        });
       });
 
       it('detail button click should load details Meta page', () => {
@@ -166,7 +185,8 @@ describe('Meta e2e test', () => {
         cy.url().should('match', metaPageUrlPattern);
       });
 
-      it('last delete button click should delete instance of Meta', () => {
+      // Reason: cannot create a required entity with relationship with required relationships.
+      it.skip('last delete button click should delete instance of Meta', () => {
         cy.get(entityDeleteButtonSelector).last().click();
         cy.getEntityDeleteDialogHeading('meta').should('exist');
         cy.get(entityConfirmDeleteButtonSelector).click();
@@ -190,9 +210,10 @@ describe('Meta e2e test', () => {
       cy.getEntityCreateUpdateHeading('Meta');
     });
 
-    it('should create an instance of Meta', () => {
-      cy.get(`[data-cy="valor"]`).type('404');
-      cy.get(`[data-cy="valor"]`).should('have.value', '404');
+    // Reason: cannot create a required entity with relationship with required relationships.
+    it.skip('should create an instance of Meta', () => {
+      cy.get(`[data-cy="valor"]`).type('1205');
+      cy.get(`[data-cy="valor"]`).should('have.value', '1205');
 
       cy.get(`[data-cy="area"]`).select('MATEMATICA');
 

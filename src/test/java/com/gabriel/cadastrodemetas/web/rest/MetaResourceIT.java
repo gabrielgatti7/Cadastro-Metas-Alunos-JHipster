@@ -88,7 +88,7 @@ class MetaResourceIT {
         // Add required entity
         Aluno aluno;
         if (TestUtil.findAll(em, Aluno.class).isEmpty()) {
-            aluno = AlunoResourceIT.createEntity();
+            aluno = AlunoResourceIT.createEntity(em);
             em.persist(aluno);
             em.flush();
         } else {
@@ -109,7 +109,7 @@ class MetaResourceIT {
         // Add required entity
         Aluno aluno;
         if (TestUtil.findAll(em, Aluno.class).isEmpty()) {
-            aluno = AlunoResourceIT.createUpdatedEntity();
+            aluno = AlunoResourceIT.createUpdatedEntity(em);
             em.persist(aluno);
             em.flush();
         } else {

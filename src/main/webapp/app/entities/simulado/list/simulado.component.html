@@ -8,15 +8,17 @@
         <span jhiTranslate="cadastrodemetasApp.simulado.home.refreshListLabel">Refresh list</span>
       </button>
 
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-simulado"
-        [routerLink]="['/simulado/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="cadastrodemetasApp.simulado.home.createLabel">Create a new Simulado</span>
-      </button>
+      <ng-container *jhiHasAnyAuthority="'ROLE_ADMIN'">
+        <button
+          id="jh-create-entity"
+          data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity create-simulado"
+          [routerLink]="['/simulado/new']"
+        >
+          <fa-icon icon="plus"></fa-icon>
+          <span jhiTranslate="cadastrodemetasApp.simulado.home.createLabel">Create a new Simulado</span>
+        </button>
+      </ng-container>
     </div>
   </h2>
 
@@ -64,15 +66,17 @@
                     <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                   </a>
 
-                  <a [routerLink]="['/simulado', simulado.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
-                    <fa-icon icon="pencil-alt"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                  </a>
+                  <ng-container *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <a [routerLink]="['/simulado', simulado.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                      <fa-icon icon="pencil-alt"></fa-icon>
+                      <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                    </a>
 
-                  <button type="submit" (click)="delete(simulado)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                    <fa-icon icon="times"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                  </button>
+                    <button type="submit" (click)="delete(simulado)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                      <fa-icon icon="times"></fa-icon>
+                      <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                    </button>
+                  </ng-container>
                 </div>
               </td>
             </tr>
